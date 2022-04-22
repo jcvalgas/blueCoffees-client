@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://toppng.com/public/uploads/thumbnail/coffee-cup-tea-white-silhouette-icon-11642050901zflurw65ap.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <title>Coffe's Blue</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <section class="home">
+      <section class="header">
+        <div class="Logo__Header logo">
+          <h1>Coffee's</h1>
+          <img src="../assets/img/logoblue.png" alt="">
+        </div>
+        <div class="icons">
+          <div class="sacola-icon">
+            <img
+              src="../assets/img/icons/sacola_site.png"
+              width="40px"
+              alt="sacola de compras"
+            >
+            <h6>Sacola</h6>
+          </div>
+          <div class="favoritos-icon">
+            <img
+              src="../assets/img/icons/icon-heart.png"
+              width="30px"
+              alt="ícone de favoritos"
+            />
+            <h6>Favoritos</h6>
+          </div>
+          <div class="button-modal-create">
+            <button onclick="abrirModal()">+</button>
+          </div>
+        </div>
+      </section>
+
+    <!-- Home -->
+    <section class="modal-overlay" id="overlay">
+
+      <div class="modal">
+
+          <div class="modal-header">
+              <h2 id="title-header-modal">Cadastrar uma paleta</h2>
+              <a onclick="fecharModal()" class="close-modal">x</a>
+          </div>
+
+          <div class="modal-body">
+              <div>
+                  <input type="hidden" id="id" >
+                  <input type="text" name="sabor" id="sabor" placeholder="Sabor do Café">
+                  <input type="number" name="preco" id="preco" placeholder="Preço do Café">
+                  <textarea type="text" name="descricao" id="descricao" placeholder="Descrição do Café"
+                      rows="5"></textarea>
+                  <input type="text" name="foto" id="foto" placeholder="Link da Foto do Café">
+                  <button id="button-form-modal" onclick="createCoffee()">Cadastrar</button>
+              </div>
+          </div>
+      </div>
+    </section>
+  
+    <section class="modal-overlay" id="overlay-delete">
+      <div class="modal">
+          <div class="modal-header">
+              <h2 id="title-header-modal">Confirmação de deleção</h2>
+              <a onclick="fecharModalDelete()" class="close-modal">x</a>
+          </div>
+          <div class="modal-body-delete">
+              <p>Deseja realmente apagar esse café?</p>
+              <div class="btns_delete">
+                  <button class="btn_delete_no btn_delete" onclick="fecharModalDelete()">Não</button>
+                  <button class="btn_delete_yes btn_delete">Sim</button>
+              </div>
+          </div>
+      </div>
+    </section>
+    
+    <div class="coffee-escolhido-espaco">
+      <div id="coffee-escolhido-input-espaco">
+        <input type="number" id="idCoffee" placeholder="Digite o ID do café e clique em 'Escolher'" />
+        <button id="idCoffeeButton" onclick="findByIdCoffees()">ESCOLHER</button>
+      </div>
+      <div id="CoffeeSelect">
+
+      </div>
+    </div>
+
+    <h2 class="principal">Cafés Disponíveis</h2>
+    <section class="Home__container">
+      <div class="CoffeeList" id="CoffeeList"></div>
+            
+    </section>
+    <script src="../assets/script/script.js"></script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 const baseURL = 'http:///localhost:3002/coffees';
+const msgAlert = document.querySelector(".msg-alert")
 
 async function findAllCoffees() {
   const response = await fetch(`${baseURL}/find-coffees`);
@@ -30,9 +31,21 @@ async function findAllCoffees() {
 async function findByIdCoffees() {
   const id = document.getElementById('idCoffee').value;
 
+  if(id == ""){
+    localStorage.setItem("message", "Digite um ID para pesquisar");
+    localStorage.setItem("type", "danger");
+    showMessageAlert();
+    return;
+  }
   const response = await fetch(`${baseURL}/find-coffees/${id}`);
-
   const coffee = await response.json();
+
+  if(coffee.message != undefined) {
+    localStorage.setItem("message", coffee.message);
+    localStorage.setItem("type", "danger");
+    showMessageAlert();
+    return;
+  }
 
   const coffeeEscolhidoDiv = document.getElementById('CoffeeSelect');
 
@@ -119,14 +132,23 @@ async function submitCoffee() {
   });
   const newCoffee = await response.json();
 
+  if(newCoffee.message != undefined){
+    localStorage.setItem("message", newCoffee.message);
+    localStorage.setItem("type", "danger");
+
+    showMessageAlert();
+    return;
+  }
+
+  if(modoEdicaoAtivado){
+    localStorage.setItem("message", "Café atualizado com sucesso");
+    localStorage.setItem("type", "success");
+  } else {
+    localStorage.setItem("message", "Café criado com sucesso");
+    localStorage.setItem("type", "success");
+  }
+
   document.location.reload(true);
-
-  // if(modoEdicaoAtivado) {
-  //   document.querySelector(`#CoffeeListItem_${id}`).outerHTML = html;
-  // } else {
-  //   document.querySelector("#CoffeeList").insertAdjacentHTML("beforeend", html);
-  // }
-
   fecharModal();
 }
 
@@ -154,8 +176,25 @@ async function deleteCoffee(id) {
   });
 
   const result = await response.json();
-
+  localStorage.setItem("message", result.message)
+  localStorage.setItem("type", "success");
   document.location.reload(true);
 
   fecharModalDelete();
 }
+
+function closeMessageAlert(){
+  setTimeout(function(){
+    msgAlert.innerText = "";
+    msgAlert.classList.remove(localStorage.getItem("type"));
+    localStorage.clear();
+  }, 3000)
+}
+
+function showMessageAlert() {
+  msgAlert.innerText = localStorage.getItem("message");
+  msgAlert.classList.add(localStorage.getItem("type"));
+  closeMessageAlert();
+}
+
+showMessageAlert();

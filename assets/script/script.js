@@ -1,4 +1,4 @@
-const baseURL = 'http:///localhost:3002/coffees';
+const baseURL = 'https://bluecoffees-server-production.up.railway.app/coffees';
 const msgAlert = document.querySelector(".msg-alert")
 
 async function findAllCoffees() {
